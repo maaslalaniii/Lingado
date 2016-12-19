@@ -9,7 +9,9 @@ const icons = {
   facebook: require('../images/facebook.png'),
   linkedin: require('../images/linkedin.png'),
   snapchat: require('../images/snapchat.png'),
-  twitter: require('../images/twitter.png')
+  twitter: require('../images/twitter.png'),
+  github: require('../images/github.png'),
+  instagram: require('../images/instagram.png')
 }
 
 export default class Social extends Component {

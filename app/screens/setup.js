@@ -16,12 +16,13 @@ export default class Setup extends Component {
 
         <Text style={styles.instructions}>Select the social media to connect</Text>
 
-        <ScrollView style={styles.icons} horizontal={true} showsHorizontalScrollIndicator={false}>
+        <View style={styles.icons}>
           <Social icon="twitter" />
           <Social icon="facebook" />
           <Social icon="linkedin" />
           <Social icon="snapchat" />
-        </ScrollView>
+          <Social icon="instagram" />
+        </View>
 
         <TouchableOpacity style={styles.continueButton}>
           <Text>Continue</Text>
@@ -34,18 +35,23 @@ export default class Setup extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#203040',
-    alignItems: 'center'
+    alignItems: 'center',
+    flex: 1
   },
   icons: {
     padding: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
   instructions: {
     color: 'gray',
-    textAlign: 'left'
+    textAlign: 'left',
+    margin: 10
   },
   settings: {
     width: 200,
     height: 200,
+
   },
   continueButton: {
     width: 200,
@@ -54,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     borderRadius: 20,
-    margin: 20
+    margin: 40
   }
 
 })
