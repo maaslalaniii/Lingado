@@ -37,10 +37,10 @@ export default class App extends Component {
 	render() {
 		return (
 			<Navigator
-				configureScene={() => Navigator.SceneConfigs.FloatFromBottomAndroid}
+				configureScene={() => Navigator.SceneConfigs.PushFromRight}
 				initialRoute={routes[0]}
 				initialRouteStack={routes}
-				renderScene={this._renderScene}
+				renderScene={this._renderScene.bind(this)}
 				/>
 		)
 	}
