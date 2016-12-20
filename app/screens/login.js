@@ -19,12 +19,11 @@ export default class Login extends Component {
 		firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
 			.catch((error) => this._handleError(error))
 			.then(() => {
-				firebase.auth().onAuthStateChanged((user) => {
-					if (user)
-						this.props.navigator.push(this.props.routes[1])
-				})
+				if (firebase.auth().currentUser) {
+					this.props.navigator.push(this.props.routes[1])
+				}
 			})
-	}
+		}
 
 
 	_signup() {
