@@ -46,7 +46,7 @@ export default class Login extends Component {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => this.setState({ accountActionSignup: true })}>
-					<Text style={styles.accountActionSignup}>don't have an account?</Text>
+					<Text style={styles.accountActionSignup}>need an account?</Text>
 				</TouchableOpacity>
 			</View>
 		)
