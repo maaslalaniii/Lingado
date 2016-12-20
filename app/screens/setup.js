@@ -3,12 +3,23 @@
  */
 
 import React, { Component } from 'react'
-import { View, Image, StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native'
+import { View, Image, StyleSheet, ScrollView, Text, TouchableOpacity, Alert } from 'react-native'
 
 import firebase from '../modules/firebase'
 import Social from '../components/social'
 
 export default class Setup extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      supportedSocialMedia: ["LinkedIn"]
+    }
+  }
+
+  _continueSetup() {
+    Alert.alert('Warning', `For now, our application supports only ${this.state.supportedSocialMedia}.`, [{ text: 'ok', onPress: () => this.props.navigator.push(this.props.routes[2]) }])
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,7 +35,7 @@ export default class Setup extends Component {
           <Social icon="instagram" />
         </View>
 
-        <TouchableOpacity style={styles.continueButton}>
+        <TouchableOpacity style={styles.continueButton} onPress={this._continueSetup.bind(this)}>
           <Text>Continue</Text>
         </TouchableOpacity>
       </View>
@@ -62,5 +73,4 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 40
   }
-
 })
