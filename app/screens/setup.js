@@ -7,6 +7,7 @@ import { View, Image, StyleSheet, ScrollView, Text, TouchableOpacity, Alert } fr
 
 import firebase from '../modules/firebase'
 import Social from '../components/social'
+import styles from './styles/setup.styles'
 
 export default class Setup extends Component {
   constructor(props) {
@@ -42,35 +43,3 @@ export default class Setup extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#203040',
-    alignItems: 'center',
-    flex: 1
-  },
-  icons: {
-    padding: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  instructions: {
-    color: 'gray',
-    textAlign: 'left',
-    margin: 10
-  },
-  settings: {
-    width: 200,
-    height: 200,
-
-  },
-  continueButton: {
-    width: 200,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    margin: 40
-  }
-})

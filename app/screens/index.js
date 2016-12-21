@@ -37,7 +37,13 @@ export default class App extends Component {
   render() {
     return (
       <Navigator
-        configureScene={() => Navigator.SceneConfigs.PushFromRight}
+        configureScene={(route) => {
+          if (route.title === 'Settings')
+            return Navigator.SceneConfigs.FloatFromBottomAndroid
+          else
+            return Navigator.SceneConfigs.PushFromRight
+          }
+        }
         initialRoute={routes[0]}
         initialRouteStack={routes}
         renderScene={this._renderScene.bind(this)}
