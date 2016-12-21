@@ -3,7 +3,9 @@
  */
 
 import React, { Component } from 'react'
-import { TextInput, StyleSheet } from 'react-native' 
+import { TextInput, StyleSheet } from 'react-native'
+
+import styles from './styles/input.styles'
 
 export default class Input extends Component {
 	render() {
@@ -17,11 +19,3 @@ export default class Input extends Component {
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	loginInformation: {
-		color: 'rgba(255,255,255,0.4)',
-		textAlign: 'center',
-		width: 250
-	}, 
-})

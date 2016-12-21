@@ -5,6 +5,8 @@
 import React, { Component } from 'react'
 import { View, Image, StyleSheet, TouchableNativeFeedback } from 'react-native'
 
+import styles from './styles/social.styles'
+
 const icons = {
   facebook: require('../images/facebook.png'),
   linkedin: require('../images/linkedin.png'),
@@ -36,18 +38,3 @@ export default class Social extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 75,
-    height: 75,
-    borderRadius: 75,
-  },
-  spacer: {
-    margin: 10
-  },
-  unselected: {
-    opacity: 0.3,
-    backgroundColor: 'black'
-  }
-})
