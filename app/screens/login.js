@@ -118,7 +118,6 @@ export default class Login extends Component {
 			</View>
 		)
 	}
->>>>>>> a35b1f43e906421cd403b9a7e26df315778ff721
 }
 
 const styles = StyleSheet.create({
