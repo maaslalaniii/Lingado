@@ -1,3 +1,7 @@
+/*
+ * Routing for the app.
+ */
+
 import React, { Component } from 'react'
 import { Navigator } from 'react-native'
 

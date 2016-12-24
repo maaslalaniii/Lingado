@@ -1,3 +1,7 @@
+/*
+ * Settings configuration for the app.
+ */
+
 import React, { Component } from 'react'
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
 
@@ -6,10 +10,9 @@ import styles from './styles/settings.styles'
 
 export default class Settings extends Component {
   _signOut() {
-    firebase.auth().signOut()
-      .then(() => {
-        this.props.navigator.popToTop(0)
-      })
+    firebase.auth()
+      .signOut()
+      .then(() => this.props.navigator.popToTop(0))
   }
 
   _saveSettings() {
@@ -19,6 +22,7 @@ export default class Settings extends Component {
   render() {
     return (
       <View style={styles.container}>
+
         <TouchableOpacity style={[styles.button, styles.highlight]} onPress={this._signOut.bind(this)}>
           <Text>Sign out</Text>
         </TouchableOpacity>
@@ -26,6 +30,7 @@ export default class Settings extends Component {
         <TouchableOpacity style={styles.button} onPress={this._saveSettings.bind(this)}>
           <Text>Save</Text>
         </TouchableOpacity>
+      
       </View>
     )
   }

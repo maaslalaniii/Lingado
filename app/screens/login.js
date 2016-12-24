@@ -1,3 +1,7 @@
+/*
+ * The login screen for firebase authentication.
+ */
+
 import React, { Component } from 'react'
 import { View, StyleSheet, TextInput, Image, TouchableOpacity, Text, StatusBar } from 'react-native'
 
@@ -18,14 +22,15 @@ export default class Login extends Component {
   }
 
   _login() {
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    firebase.auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
       .catch((error) => this._handleError(error))
       .then(() => {
         if (firebase.auth().currentUser) {
           this.props.navigator.push(this.props.routes[1])
         }
       })
-    }
+  }
 
   _signup() {
     // Ensure that the passwords match, if so create a new user
@@ -111,7 +116,9 @@ export default class Login extends Component {
 
         <Input onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder='your password' secureTextEntry={true} />
 
-        {this.state.accountActionSignup ? this._renderSignup() : this._renderLogin()}
+        { this.state.accountActionSignup
+          ? this._renderSignup()
+          : this._renderLogin() }
 
         <Image source={require('../images/mountains.png')} />
 
