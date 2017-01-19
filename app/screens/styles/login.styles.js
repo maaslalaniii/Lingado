@@ -7,8 +7,8 @@ module.exports = StyleSheet.create({
     backgroundColor: '#203040'
   },
   logo: {
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 80,
+    marginBottom: 40,
     height: 126,
     width: 147
   },

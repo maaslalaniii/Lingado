@@ -13,7 +13,6 @@ export default class Input extends Component {
 			<TextInput
 				{...this.props}
 				style={styles.loginInformation}
-				underlineColorAndroid='rgba(255, 255, 255, 0.4)'
 				placeholderTextColor='rgba(255, 255, 255, 0.4)'
 			/>
 		)

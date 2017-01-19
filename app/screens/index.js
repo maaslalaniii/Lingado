@@ -42,13 +42,9 @@ export default class App extends Component {
     return (
       <Navigator
         configureScene={(route) => {
-          if (route.title === 'Settings')
-            return Navigator.SceneConfigs.FloatFromBottomAndroid
-          else
             return Navigator.SceneConfigs.PushFromRight
-          }
-        }
-        initialRoute={routes[0]}
+        }}
+        initialRoute={routes[1]}
         initialRouteStack={routes}
         renderScene={this._renderScene.bind(this)}
         />

@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet, Text, Image, ToolbarAndroid, TouchableNativeFeedback, StatusBar } from 'react-native'
+import { View, ScrollView, StyleSheet, Text, Image, ToolbarAndroid, TouchableOpacity, StatusBar } from 'react-native'
 
 import Connect from '../components/recentConnect'
 import firebase from '../modules/firebase'
@@ -53,33 +53,33 @@ export default class Home extends Component {
       <View style={styles.container}>
 
         <StatusBar barStyle='light-content' />
-      
+
         <View style={styles.toolbar}>
           <Text style={styles.title}>Lingado</Text>
-      
-          <TouchableNativeFeedback onPress={this._showSettings.bind(this)} background={TouchableNativeFeedback.Ripple('white', true)}>
+
+          <TouchableOpacity onPress={this._showSettings.bind(this)}>
             <View>
               <Image style={styles.settings} source={require('../images/settings.png')} />
             </View>
-          </TouchableNativeFeedback>
-      
+          </TouchableOpacity>
+
         </View>
-      
+
         <ScrollView>
           <View style={styles.wrapper}>
-      
+
             <Image style={styles.qr} source={require('../images/qr.png')} />
-      
+
             <View style={styles.recentConnects}>
               <Text style={styles.recentConnectsTitle}>Recent Connects</Text>
               { this.state.loaded
                   ? this._loadRecentConnects(this.state.recentConnects)
                   : <Text style={styles.recentConnectsTitle}>No recent connections</Text> }
             </View>
-      
+
           </View>
         </ScrollView>
-      
+
       </View>
     )
   }

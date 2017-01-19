@@ -4,7 +4,7 @@ module.exports = StyleSheet.create({
   icon: {
     width: 75,
     height: 75,
-    borderRadius: 75,
+    borderRadius: 37.5,
   },
   spacer: {
     margin: 10

@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { View, Image, StyleSheet, TouchableNativeFeedback } from 'react-native'
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 import styles from './styles/social.styles'
 
@@ -30,11 +30,11 @@ export default class Social extends Component {
 
   render() {
     return (
-      <TouchableNativeFeedback onPress={() => this._select()}>
+      <TouchableOpacity onPress={() => this._select()}>
         <View style={[styles.icon, styles.spacer, !this.state.selected && styles.unselected]}>
           <Image style={styles.icon} source={icons[this.props.icon]} />
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
     )
   }
 }

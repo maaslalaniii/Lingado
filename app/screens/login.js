@@ -115,7 +115,6 @@ export default class Login extends Component {
         <Input onChangeText={(email) => this.setState({ email })} value={this.state.email} placeholder='your email address' />
 
         <Input onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder='your password' secureTextEntry={true} />
-
         { this.state.accountActionSignup
           ? this._renderSignup()
           : this._renderLogin() }

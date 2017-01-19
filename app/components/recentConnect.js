@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableNativeFeedback } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 
 import styles from './styles/recentConnect.styles'
 
@@ -17,7 +17,7 @@ export default class RecentConnect extends Component {
   }
 
   _accept() {
-    
+
   }
 
   _reject() {
@@ -31,27 +31,27 @@ export default class RecentConnect extends Component {
         <View style={styles.recentConnectImageContainer}>
           <Image style={styles.recentConnectImage} source={require('../images/profileDefault.jpg')} />
         </View>
-      
+
         <View style={styles.recentConnectInfo}>
 
           <Text style={styles.recentConnectName}>{this.props.name}</Text>
-          
+
           <View style={styles.recentConnectActions}>
 
-            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('white', false)}>
+            <TouchableOpacity>
               <View>
                 <Text style={[styles.recentConnectAction, styles.recentConnectAccept]}>accept</Text>
               </View>
-            </TouchableNativeFeedback>
-          
-            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('white', false)}>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
               <View>
                 <Text style={[styles.recentConnectAction, styles.recentConnectReject]}>reject</Text>
               </View>
-            </TouchableNativeFeedback>
-          
+            </TouchableOpacity>
+
           </View>
-          
+
         </View>
 
       </View>

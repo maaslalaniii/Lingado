@@ -8,8 +8,10 @@ module.exports = StyleSheet.create({
   },
   icons: {
     padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   instructions: {
     color: 'gray',
@@ -19,7 +21,6 @@ module.exports = StyleSheet.create({
   settings: {
     width: 200,
     height: 200,
-
   },
   continueButton: {
     width: 200,
@@ -28,6 +29,6 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     borderRadius: 20,
-    margin: 40
+    margin: 80
   }
 })
