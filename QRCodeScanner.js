@@ -9,9 +9,11 @@ var {
 
 // make sure you linked rights + added camera modules to src/ before continuing!
 import Camera from 'react-native-camera';
+
 var QRCodeRead = React.createClass({
-
-
+  // Add button to cancel
+  // Add button to take picture
+  // Taking picture mechanism uses a method from the new module (react-native-camera).
 )};
 
                                    
