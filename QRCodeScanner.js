@@ -1,7 +1,7 @@
 use 'strict';
 var React = require('react-native');
 
-var{
+var {
   Text,
   View,
   StyleSheet,
@@ -14,10 +14,29 @@ var QRCodeRead = React.createClass({
 
 )};
 
+                                   
+// Tedious stuff (drawing the box on camera and defining dimensions)
+var styles = StyleSheet.create({
+  camera: {
+    height: 568,
+    alignItems: 'center',
+  },
 
-// Make a cancel button, a square and an opacity layer using StyleSheet
-// ...
-// add code
+  rectangleContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+
+  rectangle: {
+    height: 250,
+    width: 250,
+    borderWidth: 2,
+    borderColor: '#00FF00',
+    backgroundColor: 'transparent',
+  },
+});
+                                   
 
 module.exports = QRCodeRead;
-
