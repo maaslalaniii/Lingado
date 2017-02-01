@@ -41,13 +41,11 @@ export default class App extends Component {
   render() {
     return (
       <Navigator
-        configureScene={(route) => {
-            return Navigator.SceneConfigs.PushFromRight
-        }}
-        initialRoute={routes[1]}
+        configureScene={(route) => Navigator.SceneConfigs.PushFromRight}
+        initialRoute={routes[0]}
         initialRouteStack={routes}
         renderScene={this._renderScene.bind(this)}
-        />
+      />
     )
   }
 }

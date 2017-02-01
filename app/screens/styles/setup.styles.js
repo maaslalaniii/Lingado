@@ -8,6 +8,8 @@ module.exports = StyleSheet.create({
   },
   icons: {
     padding: 10,
+    paddingLeft: 50,
+    paddingRight: 50,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',

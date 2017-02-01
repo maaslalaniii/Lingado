@@ -16,7 +16,6 @@ export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loaded: false,
       recentConnects: null
     }
   }
@@ -31,7 +30,6 @@ export default class Home extends Component {
       .child('recentConnects')
       .once('value')
       .then((snapshot) => this.setState({
-        loaded: true,
         recentConnects: snapshot.val()
       }))
   }
@@ -39,7 +37,7 @@ export default class Home extends Component {
   _loadRecentConnects(connections) {
     return (
       <View>
-        {connections.map((name, i) => <Connect name={name} key={i} />)}
+        { connections.map((name, i) => <Connect name={name} key={i} />) }
       </View>
     )
   }
@@ -72,7 +70,7 @@ export default class Home extends Component {
 
             <View style={styles.recentConnects}>
               <Text style={styles.recentConnectsTitle}>Recent Connects</Text>
-              { this.state.loaded
+              { this.state.recentConnects
                   ? this._loadRecentConnects(this.state.recentConnects)
                   : <Text style={styles.recentConnectsTitle}>No recent connections</Text> }
             </View>

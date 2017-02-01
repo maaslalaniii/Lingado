@@ -27,6 +27,6 @@ module.exports = StyleSheet.create({
     marginTop: 10
   },
   wrapper: {
-    alignItems: 'center'
+    alignItems: 'center',
   }
 })
