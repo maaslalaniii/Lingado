@@ -1,24 +1,17 @@
-use 'strict';
-var React = require('react-native');
+import { Component } from 'react'
 
-var {
-  Text,
-  View,
-  StyleSheet,
-} = React;
+import { Text, View, StyleSheet } from 'react-native'
 
-// make sure you linked rights + added camera modules to src/ before continuing!
-import Camera from 'react-native-camera';
+// Ensure react-native-camera is linked before continuing
+// Type: react-native link react-native-camera
+import Camera from 'react-native-camera'
 
-var QRCodeRead = React.createClass({
+export default class QRCodeRead extends Component {
   // Add button to cancel
-  // Add button to take picture
-  // Taking picture mechanism uses a method from the new module (react-native-camera).
-)};
+  // Add button to scan QRCode
+}
 
-                                   
-// Tedious stuff (drawing the box on camera and defining dimensions)
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   camera: {
     height: 568,
     alignItems: 'center',
@@ -38,7 +31,4 @@ var styles = StyleSheet.create({
     borderColor: '#00FF00',
     backgroundColor: 'transparent',
   },
-});
-                                   
-
-module.exports = QRCodeRead;
+})
