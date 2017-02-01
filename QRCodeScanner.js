@@ -1,14 +1,18 @@
 import { Component } from 'react'
 
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
 // Ensure react-native-camera is linked before continuing
 // Type: react-native link react-native-camera
 import Camera from 'react-native-camera'
 
 export default class QRCodeRead extends Component {
-  // Add button to cancel
-  // Add button to scan QRCode
+  render() {
+    return (
+      // Add button to cancel
+      // Add button to scan QRCode
+    )
+  }
 }
 
 const styles = StyleSheet.create({
