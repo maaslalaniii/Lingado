@@ -5,6 +5,11 @@ module.exports = StyleSheet.create({
     flex: 1,
     backgroundColor: '#2a3b4c',
   },
+  scan: {
+    color: '#fff',
+    fontSize: 16,
+    marginTop: 20
+  },
   toolbar: {
     height: 56,
     backgroundColor: '#203040',

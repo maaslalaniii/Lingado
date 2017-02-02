@@ -9,8 +9,10 @@ import Connect from '../components/recentConnect'
 import firebase from '../modules/firebase'
 import styles from './styles/home.styles'
 
-const database = firebase.database().ref()
+const database = firebase.database()
 const auth = firebase.auth()
+const usersRef = database.ref('users')
+
 
 export default class Home extends Component {
   constructor(props) {
@@ -20,16 +22,17 @@ export default class Home extends Component {
     }
   }
 
-  componentWillMount() {
-    if (!auth.currentUser) {
-      return
-    }
+  componentDidMount() {
+    this._listenForConnects()
+  }
 
-    database.child('users')
+  _listenForConnects() {
+    if (!auth.currentUser) return
+
+    usersRef
       .child(auth.currentUser.uid)
       .child('recentConnects')
-      .once('value')
-      .then((snapshot) => this.setState({
+      .on('value', (snapshot) => this.setState({
         recentConnects: snapshot.val()
       }))
   }
@@ -37,7 +40,7 @@ export default class Home extends Component {
   _loadRecentConnects(connections) {
     return (
       <View>
-        { connections.map((name, i) => <Connect name={name} key={i} />) }
+        {connections.map((name, i) => <Connect name={name} key={i} />)}
       </View>
     )
   }
@@ -67,12 +70,14 @@ export default class Home extends Component {
           <View style={styles.wrapper}>
 
             <Image style={styles.qr} source={require('../images/qr.png')} />
-
+            <Text style={styles.scan} onPress={() => {
+              this.props.navigator.push(this.props.routes[4])
+            } }>Scan</Text>
             <View style={styles.recentConnects}>
-              <Text style={styles.recentConnectsTitle}>Recent Connects</Text>
-              { this.state.recentConnects
-                  ? this._loadRecentConnects(this.state.recentConnects)
-                  : <Text style={styles.recentConnectsTitle}>No recent connections</Text> }
+              <Text style={styles.recentConnectsTitle} >Recent Connects</Text>
+              {this.state.recentConnects
+                ? this._loadRecentConnects(this.state.recentConnects)
+                : <Text style={styles.recentConnectsTitle}>No recent connections</Text>}
             </View>
 
           </View>

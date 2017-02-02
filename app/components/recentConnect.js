@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 
 import styles from './styles/recentConnect.styles'
+import firebase from '../modules/firebase'
 
 export default class RecentConnect extends Component {
   constructor(props) {
@@ -38,13 +39,13 @@ export default class RecentConnect extends Component {
 
           <View style={styles.recentConnectActions}>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this._accept.bind(this)}>
               <View>
                 <Text style={[styles.recentConnectAction, styles.recentConnectAccept]}>accept</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this._reject.bind(this)}>
               <View>
                 <Text style={[styles.recentConnectAction, styles.recentConnectReject]}>reject</Text>
               </View>
