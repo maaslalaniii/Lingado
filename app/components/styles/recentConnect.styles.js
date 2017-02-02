@@ -39,5 +39,14 @@ module.exports = StyleSheet.create({
   },
   recentConnectReject: {
     color: '#e74c3c'
+  },
+  resultContainer: {
+    margin: 10
+  },
+  resultAccepted: {
+    color: '#2ecc71'
+  },
+  resultRejected: {
+    color: '#e74c3c'
   }
 })

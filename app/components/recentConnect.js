@@ -3,10 +3,17 @@
  */
 
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity
+} from 'react-native'
 
 import styles from './styles/recentConnect.styles'
 import firebase from '../modules/firebase'
+
+const usersRef = firebase.database().ref('users')
 
 export default class RecentConnect extends Component {
   constructor(props) {
@@ -18,11 +25,45 @@ export default class RecentConnect extends Component {
   }
 
   _accept() {
-
+    this.setState({ accepted: true })
   }
 
   _reject() {
+    this.setState({ rejected: true })
+  }
 
+  _renderActions() {
+    return (
+      <View style={styles.recentConnectActions}>
+
+        <TouchableOpacity onPress={() => this._accept()}>
+          <View>
+            <Text style={[styles.recentConnectAction, styles.recentConnectAccept]}>accept</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this._reject()}>
+          <View>
+            <Text style={[styles.recentConnectAction, styles.recentConnectReject]}>reject</Text>
+          </View>
+        </TouchableOpacity>
+
+      </View>
+    )
+  }
+
+  _renderResult() {
+    return this.state.accepted
+    ? (
+      <View style={styles.resultContainer}>
+        <Text  style={styles.resultAccepted}>was accepted</Text>
+      </View>
+    )
+    : (
+      <View style={styles.resultContainer}>
+        <Text style={styles.resultRejected}>was rejected</Text>
+      </View>
+    )
   }
 
   render() {
@@ -37,21 +78,11 @@ export default class RecentConnect extends Component {
 
           <Text style={styles.recentConnectName}>{this.props.name}</Text>
 
-          <View style={styles.recentConnectActions}>
-
-            <TouchableOpacity onPress={() => this._accept.bind(this)}>
-              <View>
-                <Text style={[styles.recentConnectAction, styles.recentConnectAccept]}>accept</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => this._reject.bind(this)}>
-              <View>
-                <Text style={[styles.recentConnectAction, styles.recentConnectReject]}>reject</Text>
-              </View>
-            </TouchableOpacity>
-
-          </View>
+          {
+            !this.state.accepted && !this.state.rejected
+              ? this._renderActions()
+              : this._renderResult()
+          }
 
         </View>
 
