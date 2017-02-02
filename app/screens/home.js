@@ -1,9 +1,18 @@
 /**
- * The home screen for the QR code and actions against recent connections.
+ * The home screen.
  */
 
 import React, { Component } from 'react'
-import { View, ScrollView, StyleSheet, Text, Image, ToolbarAndroid, TouchableOpacity, StatusBar } from 'react-native'
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Text,
+  Image,
+  ToolbarAndroid,
+  TouchableOpacity,
+  StatusBar
+} from 'react-native'
 
 import Connect from '../components/recentConnect'
 import firebase from '../modules/firebase'
@@ -12,7 +21,6 @@ import styles from './styles/home.styles'
 const database = firebase.database()
 const auth = firebase.auth()
 const usersRef = database.ref('users')
-
 
 export default class Home extends Component {
   constructor(props) {
@@ -32,9 +40,7 @@ export default class Home extends Component {
     usersRef
       .child(auth.currentUser.uid)
       .child('recentConnects')
-      .on('value', (snapshot) => this.setState({
-        recentConnects: snapshot.val()
-      }))
+      .on('value', (snapshot) => this.setState({ recentConnects: snapshot.val() }))
   }
 
   _loadRecentConnects(connections) {
@@ -57,27 +63,47 @@ export default class Home extends Component {
 
         <View style={styles.toolbar}>
           <Text style={styles.title}>Lingado</Text>
-
           <TouchableOpacity onPress={this._showSettings.bind(this)}>
             <View>
               <Image style={styles.settings} source={require('../images/settings.png')} />
             </View>
           </TouchableOpacity>
-
         </View>
 
         <ScrollView>
+
           <View style={styles.wrapper}>
 
-            <Image style={styles.qr} source={require('../images/qr.png')} />
-            <Text style={styles.scan} onPress={() => {
-              this.props.navigator.push(this.props.routes[4])
-            } }>Scan</Text>
+            <View style={[styles.wrapper, styles.profileView]}>
+              <Image style={styles.profileImage} source={require('../images/profileDefault.jpg')} />
+              <Text style={styles.profileEmail}>
+                {
+                  auth.currentUser
+                    ? auth.currentUser.email
+                    : 'Please log in'
+                }
+              </Text>
+            </View>
+
+            <TouchableOpacity onPress={() => _this._connectWithNFC()}>
+              <View style={styles.connectButton}>
+                <Text style={styles.nfcConnect}>Connect with NFC</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => _this._connectWithQR()}>
+              <View style={styles.connectButton}>
+                <Text style={styles.qrConnect}>Connect with QR</Text>
+              </View>
+            </TouchableOpacity>
+
             <View style={styles.recentConnects}>
               <Text style={styles.recentConnectsTitle} >Recent Connects</Text>
-              {this.state.recentConnects
-                ? this._loadRecentConnects(this.state.recentConnects)
-                : <Text style={styles.recentConnectsTitle}>No recent connections</Text>}
+              {
+                this.state.recentConnects
+                  ? this._loadRecentConnects(this.state.recentConnects)
+                  : <Text style={styles.recentConnectsTitle}>No recent connections</Text>
+              }
             </View>
 
           </View>
@@ -86,5 +112,4 @@ export default class Home extends Component {
       </View>
     )
   }
-
 }
