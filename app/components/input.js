@@ -3,7 +3,10 @@
  */
 
 import React, { Component } from 'react'
-import { TextInput, StyleSheet } from 'react-native'
+import {
+	TextInput,
+	StyleSheet
+} from 'react-native'
 
 import styles from './styles/input.styles'
 

@@ -3,7 +3,15 @@
  */
 
 import React, { Component } from 'react'
-import { View, StyleSheet, TextInput, Image, TouchableOpacity, Text, StatusBar } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Text,
+  StatusBar
+} from 'react-native'
 
 import Input from '../components/input'
 import firebase from '../modules/firebase'

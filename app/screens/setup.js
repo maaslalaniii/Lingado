@@ -3,7 +3,15 @@
  */
 
 import React, { Component } from 'react'
-import { View, Image, StyleSheet, ScrollView, Text, TouchableOpacity, Alert } from 'react-native'
+import {
+  View,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  Alert
+} from 'react-native'
 
 import firebase from '../modules/firebase'
 import Social from '../components/social'
@@ -18,7 +26,15 @@ export default class Setup extends Component {
   }
 
   _continueSetup() {
-    Alert.alert('Warning', `For now, our application supports only ${this.state.supportedSocialMedia}.`, [{ text: 'ok', onPress: () => this.props.navigator.push(this.props.routes[2]) }])
+    Alert.alert(
+      'Warning',
+      `For now, our application supports only ${this.state.supportedSocialMedia}.`,
+      [{
+        text: 'ok',
+        onPress: () => 
+          this.props.navigator.push(this.props.routes[2])
+      }]
+    )
   }
 
   render() {

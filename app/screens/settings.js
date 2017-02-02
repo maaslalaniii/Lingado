@@ -3,7 +3,12 @@
  */
 
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text
+} from 'react-native'
 
 import firebase from '../modules/firebase'
 import styles from './styles/settings.styles'
@@ -16,6 +21,7 @@ export default class Settings extends Component {
   }
 
   _saveSettings() {
+    // Update settings
     this.props.navigator.pop()
   }
 
