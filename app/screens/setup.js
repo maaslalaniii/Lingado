@@ -52,9 +52,11 @@ export default class Setup extends Component {
           <Social icon="instagram" />
         </View>
 
-        <TouchableOpacity style={styles.continueButton} onPress={this._continueSetup.bind(this)}>
-          <Text>Continue</Text>
-        </TouchableOpacity>
+        <View style={styles.continueButtonContainer}>
+          <TouchableOpacity style={styles.continueButton} onPress={this._continueSetup.bind(this)}>
+            <Text>Continue</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }

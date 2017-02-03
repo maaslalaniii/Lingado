@@ -8,8 +8,8 @@ module.exports = StyleSheet.create({
   },
   icons: {
     padding: 10,
-    paddingLeft: 50,
-    paddingRight: 50,
+    paddingLeft: 16,
+    paddingRight: 16,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -31,6 +31,10 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     borderRadius: 20,
-    margin: 80
+    marginBottom: 50
+  },
+  continueButtonContainer: {
+    flex: 1,
+    justifyContent:'flex-end'
   }
 })
