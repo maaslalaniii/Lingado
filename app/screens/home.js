@@ -35,6 +35,7 @@ export default class Home extends Component {
   }
 
   _listenForConnects() {
+    // Ensure user is logged in.
     if (!auth.currentUser) return
 
     usersRef
@@ -55,11 +56,17 @@ export default class Home extends Component {
     this.props.navigator.push(this.props.routes[3])
   }
 
+  _connectWithNFC() {
+    // Go to NFC connect screen
+  }
+
+  _connectWithQR() {
+    // Go to QR connect screen
+  }
+
   render() {
     return (
       <View style={styles.container}>
-
-        <StatusBar barStyle='light-content' />
 
         <View style={styles.toolbar}>
           <Text style={styles.title}>Lingado</Text>
@@ -85,13 +92,13 @@ export default class Home extends Component {
               </Text>
             </View>
 
-            <TouchableOpacity onPress={() => _this._connectWithNFC()}>
+            <TouchableOpacity onPress={() => this._connectWithNFC()}>
               <View style={styles.connectButton}>
                 <Text style={styles.nfcConnect}>Connect with NFC</Text>
               </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => _this._connectWithQR()}>
+            <TouchableOpacity onPress={() => this._connectWithQR()}>
               <View style={styles.connectButton}>
                 <Text style={styles.qrConnect}>Connect with QR</Text>
               </View>
