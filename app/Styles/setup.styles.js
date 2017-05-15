@@ -14,35 +14,47 @@ export default styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingHorizontal: 40,
     paddingVertical: 50,
-    justifyContent: 'center',
     borderRadius: 10,
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+  },
+  getStarted: {
+    color: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    backgroundColor: 'transparent'
   },
   logo: {
     width: 100,
     height: 100,
   },
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'space-between',
+    padding: 35
+  },
   title: {
     fontSize: 40,
     paddingVertical: 5,
-    color: '#203040'
+    color: '#203040',
   },
   subtitle: {
     fontSize: 20,
     padding: 5,
-    color: '#203040'
+    color: '#203040',
   },
   text: {
     padding: 5,
-    color: 'rgba(0, 0, 0, 0.5)'
+    color: 'rgba(0, 0, 0, 0.5)',
   },
   continueButton: {
     marginTop: 30,
     padding: 18,
     borderRadius: 50,
     backgroundColor: '#06ce97',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   button: {
     width: 64,
@@ -51,19 +63,17 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#06ce97',
     borderRadius: 64,
-    alignSelf: 'flex-end',
-    margin: 35,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18
+    fontSize: 18,
   },
   info: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   mountains: {
     position: 'absolute',
-    bottom: 0
+    bottom: 0,
   },
 })

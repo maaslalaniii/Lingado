@@ -39,12 +39,36 @@ export default styles = StyleSheet.create({
     alignSelf: 'center'
   },
   settings: {
-    // width: 200,
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: 100,
     padding: 15,
-    marginTop: 50,
     alignItems: 'center',
+  },
+  userCard: {
+    backgroundColor: '#eee',
+    marginHorizontal: 20,
+    marginVertical: 40,
+    paddingHorizontal: 40,
+    paddingVertical: 30,
+    borderRadius: 10,
+    alignSelf: 'center',
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  dismiss: {
+    padding: 16,
+    borderRadius: 50,
+    backgroundColor: '#06ce97',
+    alignItems: 'center',
+  },  
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 50
   }
 
 })
