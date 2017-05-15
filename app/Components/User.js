@@ -1,40 +1,73 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { 
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Animated,
+  Easing,
+  Linking
+} from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 export default class User extends React.Component {
+
+  _open(url) {
+    Linking.canOpenURL(url)
+      .then(supported => {
+        if (!supported) {
+          console.log(`Cannot handle url: ${url}`)
+        } else {
+          Linking.openURL(url)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
   render() {
     return (
-      <View style={styles.user}>
+      <View style={styles.user} {...this.props}>
 
         <TouchableOpacity style={styles.item}>
           <Ionicons style={styles.icon} name="md-person" size={20} />
           <Text style={styles.info}>{this.props.name}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {this._open(`tel:${this.props.phone}`)}}>
+          <Ionicons style={styles.icon} name="ios-call" size={20} />
+          <Text style={styles.info}>{this.props.phone}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => {this._open(`mailto:${this.props.email}?subject=Lingado`)}}>
           <Ionicons style={styles.icon} name="md-mail" size={18} />
           <Text style={styles.info}>{this.props.email}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {this._open(`linkedin://profile/${this.props.linkedin}`)}}>
           <Ionicons style={styles.icon} name="logo-linkedin" size={20} />
           <Text style={styles.info}>{this.props.linkedin}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {this._open(`fb://profile/${this.props.facebook}`)}}>
           <Ionicons style={styles.icon} name="logo-facebook" size={20} />
           <Text style={styles.info}>{this.props.facebook}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {this._open(`instagram://user?username=${this.props.instagram}`)}}>
           <Ionicons style={styles.icon} name="logo-instagram" size={20} />
           <Text style={styles.info}>{this.props.instagram}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity style={styles.item} onPress={() => {this._open(`twitter://user?screen_name=${this.props.twitter}?subject=Lingado`)}}>
           <Ionicons style={styles.icon} name="logo-twitter" size={20} />
           <Text style={styles.info}>{this.props.twitter}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item} onPress={() => {this._open(`snapchat://add/${this.props.snapchat}?subject=Lingado`)}}>
+          <Ionicons style={styles.icon} name="logo-snapchat" size={20} />
+          <Text style={styles.info}>{this.props.snapchat}</Text>
         </TouchableOpacity>
 
       </View>
@@ -45,21 +78,20 @@ export default class User extends React.Component {
 const styles = StyleSheet.create({
   user: {
     alignItems: 'center',
-    width: 300,
-    paddingTop: 25,
-    paddingBottom: 25,
-    backgroundColor: '#203040',
+    alignSelf: 'center',
+    padding: 25,
   },
   item: {
     width: 200,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10
+    padding: 15
   },
   icon: {
-    color: 'rgba(255, 255, 255, 0.5)'
+    color: 'rgba(0, 0, 0, 0.5)'
   },
   info: {
-    color: 'rgba(255, 255, 255, 0.5)'
+    color: 'rgba(0, 0, 0, 0.5)',
+    textAlign: 'right'
   },
 })
