@@ -1,4 +1,5 @@
 import React from 'react'
+import * as Animatable from 'react-native-animatable'
 import { Constants } from 'expo'
 import { Ionicons } from '@expo/vector-icons'
 import {
@@ -6,7 +7,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal,
 } from 'react-native'
 
 import styles from '../Styles/home.styles'
@@ -19,6 +21,7 @@ export default class Home extends React.Component {
     super(props)
     this.state = {
       code: undefined,
+      showUser: false,
       text: '',
       user: null
     }
@@ -32,28 +35,29 @@ export default class Home extends React.Component {
   _search() {
     fetch('https://lingado-6b296.firebaseio.com/users.json')
       .then(response => response.json())
-      .then(response => {
-        this.setState({ user: response[this.state.text] })
-      })
+      .then(response => this.setState({ user: response[this.state.text], showUser: true }))
   }
 
 
   _displayUser(user) {
     return (
-      <View>
-        <User
-          name={user.name}
-          email={user.email}
-          phone={user.phone}
-          twitter={user.twitter}
-          facebook={user.facebook}
-          instagram={user.instagram}
-          linkedin={user.linkedin}
-        />
-
-        <Ionicons onPress={() => alert('Save this profile by a screenshot\nPress the home and power button.')} style={styles.star} name="md-star-outline" size={30} color='rgba(255, 255, 255, 0.8)' />
-
-      </View>
+      <Modal animationType='slide' transparent={true} visible={this.state.showUser}>
+        <View style={styles.userCard}>
+          <User
+            name={user.name}
+            email={user.email.length >= 14 ? user.email.split('@')[0] + '\n@' + user.email.split('@')[1] : user.email}
+            phone={user.phone}
+            twitter={user.twitter}
+            facebook={user.facebook}
+            instagram={user.instagram}
+            linkedin={user.linkedin} 
+            snapchat={user.snapchat}
+          />
+          <TouchableOpacity style={styles.dismiss} onPress={() => this.setState({ showUser: false, text: '', user: undefined })}>
+            <Text style={styles.buttonText}>Done</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     )
   }
 
@@ -75,12 +79,13 @@ export default class Home extends React.Component {
 
         </View>
 
-        {this.state.user
+        {
+          this.state.user
           ? this._displayUser(this.state.user)
-          : <View>
+          : <View style={styles.wrapper}>
               <Text style={styles.instructions} >Search for users by their code. {this.state.code} is your code.</Text>
               <TouchableOpacity style={styles.settings} onPress={() => this.props.navigator.pop()}>
-                <Text>Edit Information</Text>
+                <Text>Edit Your Information</Text>
               </TouchableOpacity>
             </View>
         }
