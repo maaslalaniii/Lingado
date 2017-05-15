@@ -31,6 +31,7 @@ export default class Setup extends React.Component {
       instagram: '',
       linkedin: '',
       twitter: '',
+      snapchat: '',
     }
   }
 
@@ -40,7 +41,7 @@ export default class Setup extends React.Component {
 
         if (!code) {
           code = this._generateCode()
-          this.setState({ code, welcome: true })
+          this.setState({ code })
           AsyncStorage.setItem('code', code)
         }
 
@@ -50,7 +51,7 @@ export default class Setup extends React.Component {
 
           fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`)
             .then(response => response.json())
-            .then(user => this.setState({ name, email, phone, facebook, instagram, linkedin, twitter } = user))
+            .then(user => this.setState({ name, email, phone, facebook, instagram, linkedin, twitter, snapchat } = user))
         }
 
       })
@@ -72,7 +73,8 @@ export default class Setup extends React.Component {
         facebook: this.state.facebook,
         instagram: this.state.instagram,
         linkedin: this.state.linkedin,
-        twitter: this.state.twitter
+        twitter: this.state.twitter,
+        snapchat: this.state.snapchat
       })
     })
       .then(response => this.props.navigator.push(this.props.routes[1]))
@@ -150,11 +152,25 @@ export default class Setup extends React.Component {
             value={this.state.twitter}
             placeholder='Twitter' />
 
+          <InformationInput
+            icon='logo-snapchat'
+            onChangeText={snapchat => this.setState({ snapchat })}
+            value={this.state.snapchat}
+            placeholder='Snapchat' />
+
         </View>
 
-        <TouchableOpacity onPress={() => this._submitInformation()} style={styles.button}>
-          <Ionicons name="ios-arrow-round-forward" size={45} color="white" />
-        </TouchableOpacity>
+        <View style={styles.wrapper}>
+
+          <TouchableOpacity onPress={() => this.setState({ welcome: true })} style={styles.getStartedButto}>
+            <Text style={styles.getStarted}>Need help?</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity onPress={() => this._submitInformation()} style={styles.button}>
+            <Ionicons name="ios-arrow-round-forward" size={45} color="white" />
+          </TouchableOpacity>
+
+        </View>
 
       </View>
     )
