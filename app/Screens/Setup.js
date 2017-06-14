@@ -14,7 +14,6 @@ import {
   Modal
 } from 'react-native'
 
-import styles from '../Styles/setup.styles'
 import InformationInput from '../Components/InformationInput'
 
 export default class Setup extends React.Component {
@@ -46,15 +45,25 @@ export default class Setup extends React.Component {
         }
 
         else {
-          this.props.navigator.push(this.props.routes[1])
           this.setState({ code })
-
+          this.props.navigator.push({ title: 'Home', code: this.state.code })
           fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`)
             .then(response => response.json())
-            .then(user => this.setState({ name, email, phone, facebook, instagram, linkedin, twitter, snapchat } = user))
+            .then(user => {this.setState({
+              name: user.name,
+              email: user.email,
+              phone: user.phone,
+              facebook: user.facebook,
+              instagram: user.instagram,
+              linkedin: user.linkedin,
+              twitter: user.twitter,
+              snapchat: user.snapchat
+            })
+            }
+          )
         }
 
-      })
+      }).done()
   }
 
   _submitInformation() {
@@ -77,7 +86,7 @@ export default class Setup extends React.Component {
         snapchat: this.state.snapchat
       })
     })
-      .then(response => this.props.navigator.push(this.props.routes[1]))
+      .then(response => this.props.navigator.push({ title: 'Home', code: this.state.code }))
 
   }
 
@@ -176,3 +185,80 @@ export default class Setup extends React.Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: Constants.statusBarHeight + 40,
+    backgroundColor: '#203040',
+  },
+  instructions: {
+    backgroundColor: '#eee',
+    marginVertical: 35,
+    marginHorizontal: 20,
+    paddingHorizontal: 40,
+    paddingVertical: 50,
+    borderRadius: 10,
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  getStarted: {
+    color: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    backgroundColor: 'transparent'
+  },
+  logo: {
+    width: 100,
+    height: 100,
+  },
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'space-between',
+    padding: 35
+  },
+  title: {
+    fontSize: 40,
+    paddingVertical: 5,
+    color: '#203040',
+  },
+  subtitle: {
+    fontSize: 20,
+    padding: 5,
+    color: '#203040',
+  },
+  text: {
+    padding: 5,
+    color: 'rgba(0, 0, 0, 0.5)',
+  },
+  continueButton: {
+    marginTop: 30,
+    padding: 18,
+    borderRadius: 50,
+    backgroundColor: '#06ce97',
+    alignItems: 'center',
+  },
+  button: {
+    width: 64,
+    height: 64,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#06ce97',
+    borderRadius: 64,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  info: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  mountains: {
+    position: 'absolute',
+    bottom: 0,
+  },
+})

@@ -1,17 +1,8 @@
 import React from 'react'
-import * as Animatable from 'react-native-animatable'
 import { Constants } from 'expo'
 import { Ionicons } from '@expo/vector-icons'
-import {
-  AsyncStorage,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-} from 'react-native'
+import { AsyncStorage, StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native'
 
-import styles from '../Styles/home.styles'
 import User from '../Components/User'
 import SearchBar from '../Components/SearchBar'
 
@@ -20,16 +11,11 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      code: undefined,
+      code: '',
       showUser: false,
       text: '',
       user: null
     }
-  }
-
-  componentWillMount() {
-    AsyncStorage.getItem('code')
-      .then(code => this.setState({ code }))
   }
 
   _search() {
@@ -64,8 +50,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
-        <Text style={styles.code}>{this.state.code}</Text>
+        <Text style={styles.code}>{this.props.code}</Text>
 
         <View style={styles.search}>
 
@@ -75,7 +60,7 @@ export default class Home extends React.Component {
             onBlur={() => this._search()}
           />
 
-          <Ionicons style={styles.icon} name='md-search' size={20} color="rgba(255, 255, 255, 0.4)" />
+          <Ionicons onPress={() => this._search()} style={styles.icon} name='md-search' size={20} color="rgba(255, 255, 255, 0.4)" />
 
         </View>
 
@@ -83,7 +68,7 @@ export default class Home extends React.Component {
           this.state.user
           ? this._displayUser(this.state.user)
           : <View style={styles.wrapper}>
-              <Text style={styles.instructions} >Search for users by their code. {this.state.code} is your code.</Text>
+              <Text style={styles.instructions}>Search for users by their code. {this.props.code} is your code.</Text>
               <TouchableOpacity style={styles.settings} onPress={() => this.props.navigator.pop()}>
                 <Text>Edit Your Information</Text>
               </TouchableOpacity>
@@ -94,3 +79,75 @@ export default class Home extends React.Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#203040',
+    alignItems: 'center',
+    paddingTop: Constants.statusBarHeight,
+  },
+  search: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(255, 255, 255, 0.8)',
+    marginTop: 40,
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingLeft: 5,
+    paddingRight: 5,
+    margin: 25
+  },
+  instructions: {
+    marginTop: 30,
+    width: 200,
+    color: 'rgba(255, 255, 255, 0.5)',
+  },
+  star: {
+    alignSelf: 'flex-end',
+    marginRight: 60
+  },
+  code: {
+    fontSize: 64,
+    marginTop: 30,
+    color: 'rgba(255, 255, 255, 0.8)'
+  },
+  searchBar: {
+    width: 200,
+    height: 44,
+    fontSize: 18,
+    alignSelf: 'center'
+  },
+  settings: {
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 100,
+    padding: 15,
+    alignItems: 'center',
+  },
+  userCard: {
+    backgroundColor: '#eee',
+    marginHorizontal: 20,
+    marginVertical: 40,
+    paddingHorizontal: 40,
+    paddingVertical: 30,
+    borderRadius: 10,
+    alignSelf: 'center',
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  dismiss: {
+    padding: 16,
+    borderRadius: 50,
+    backgroundColor: '#06ce97',
+    alignItems: 'center',
+  },  
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 50
+  }
+
+})
