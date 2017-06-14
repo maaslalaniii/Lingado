@@ -6,16 +6,8 @@ export default class User extends React.Component {
 
   _open(url) {
     Linking.canOpenURL(url)
-      .then(supported => {
-        if (!supported) {
-          console.log(`Cannot handle url: ${url}`)
-        } else {
-          Linking.openURL(url)
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      .then(supported => supported ? Linking.openURL(url) : console.log(`Cannot handle url: ${url}`))
+      .catch(error => console.log(error))
   }
 
   render() {
