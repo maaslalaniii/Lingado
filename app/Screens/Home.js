@@ -18,6 +18,10 @@ export default class Home extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ code: this.props.code })
+  }
+
   _search() {
     fetch('https://lingado-6b296.firebaseio.com/users.json')
       .then(response => response.json())
