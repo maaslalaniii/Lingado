@@ -4,6 +4,7 @@
   "slug": "lingado",
   "privacy": "public",
   "sdkVersion": "16.0.0",
+  "slug": "Lingado",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",
@@ -16,6 +17,10 @@
     "assetExts": ["ttf", "mp4"]
   },
   "ios": {
-    "supportsTablet": true
+    "supportsTablet": true,
+    "bundleIdentifier": "ca.lingado.maas"
+  },
+  "android": {
+    "package": "ca.lingado.maas"
   }
 }
