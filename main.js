@@ -21,9 +21,8 @@ class App extends React.Component {
   render() {
     return (
       <Navigator
-        configureScene={(route) => Navigator.SceneConfigs.PushFromRight}
-        initialRoute={routes[0]}
-        initialRouteStack={routes}
+        configureScene={route => Navigator.SceneConfigs.PushFromRight}
+        initialRoute={{ title: 'Setup' }}
         renderScene={this._renderScene.bind(this)}
       />
     )
