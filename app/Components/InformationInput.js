@@ -1,11 +1,6 @@
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput
-} from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 
 export default class InformationInput extends React.Component {
   render() {
