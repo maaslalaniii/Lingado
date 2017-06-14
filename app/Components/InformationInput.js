@@ -18,6 +18,9 @@ export default class InformationInput extends React.Component {
           placeholder={this.props.placeholder}
           placeholderTextColor='rgba(255, 255, 255, 0.4)'
           underlineColorAndroid='transparent'
+          autoCorrect={false}
+          spellCheck={false}
+          autoCapitalize='none'
         />
       </View>
     )
