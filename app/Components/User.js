@@ -1,13 +1,5 @@
 import React from 'react'
-import { 
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Animated,
-  Easing,
-  Linking
-} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Animated, Easing, Linking } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 export default class User extends React.Component {
