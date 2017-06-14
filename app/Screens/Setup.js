@@ -49,24 +49,14 @@ export default class Setup extends React.Component {
           this.props.navigator.push({ title: 'Home', code: this.state.code })
           fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`)
             .then(response => response.json())
-            .then(user => {this.setState({
-              name: user.name,
-              email: user.email,
-              phone: user.phone,
-              facebook: user.facebook,
-              instagram: user.instagram,
-              linkedin: user.linkedin,
-              twitter: user.twitter,
-              snapchat: user.snapchat
-            })
-            }
-          )
+            .then(user => this.setState({ name: user.name, email: user.email, phone: user.phone, facebook: user.facebook, instagram: user.instagram, linkedin: user.linkedin, twitter: user.twitter, snapchat: user.snapchat }))
         }
-
-      }).done()
+      })
   }
 
   _submitInformation() {
+
+    this.props.navigator.push({ title: 'Home', code: this.state.code })
 
     fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`, {
       method: 'PUT',
@@ -85,8 +75,7 @@ export default class Setup extends React.Component {
         twitter: this.state.twitter,
         snapchat: this.state.snapchat
       })
-    })
-      .then(response => this.props.navigator.push({ title: 'Home', code: this.state.code }))
+    }).then(response => console.log(response))
 
   }
 
