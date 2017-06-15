@@ -8,6 +8,8 @@ Then, open [Lingado](https://exp.host/@maaslalaniii/Lingado) or search for it on
 ## Tutorial
 Once you open the app, enter all the information you wish to share and click the green button to proceed. You will be presented with a screen which is used for search and also shows your code to others. Simply search for someone's code or tell them yours and a user information card will pop-up. You can click on the email information to draft up an email or tap the phone number to call them directly from the app, if you are on android you can also add the person on all social media if you have the respective apps.  
 
+[Try a demo](https://appetize.io/embed/jwh5knv82xyhn3vaq3teg79g50?device=nexus5&scale=75&orientation=portrait&osVersion=7.0)
+
 ## Todo
 * Use NFC and OCR to make it easier to connect with people.
 * Have authentication making it possible to verify and easier to input information.
