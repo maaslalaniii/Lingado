@@ -51,31 +51,36 @@ export default class Setup extends React.Component {
             .then(response => response.json())
             .then(user => this.setState({ name: user.name, email: user.email, phone: user.phone, facebook: user.facebook, instagram: user.instagram, linkedin: user.linkedin, twitter: user.twitter, snapchat: user.snapchat }))
         }
+
       })
   }
 
   _submitInformation() {
+    AsyncStorage.getItem('code')
+      .then(code => {
+        this.setState({ code })
 
-    this.props.navigator.push({ title: 'Home', code: this.state.code })
+        this.props.navigator.push({ title: 'Home', code: this.state.code })
 
-    fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        code: this.state.code,
-        name: this.state.name,
-        email: this.state.email,
-        phone: this.state.phone,
-        facebook: this.state.facebook,
-        instagram: this.state.instagram,
-        linkedin: this.state.linkedin,
-        twitter: this.state.twitter,
-        snapchat: this.state.snapchat
-      })
-    }).then(response => console.log(response))
+        fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`, {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            code: this.state.code,
+            name: this.state.name,
+            email: this.state.email,
+            phone: this.state.phone,
+            facebook: this.state.facebook,
+            instagram: this.state.instagram,
+            linkedin: this.state.linkedin,
+            twitter: this.state.twitter,
+            snapchat: this.state.snapchat
+          })
+        }).then(response => console.log(response))
+    })
 
   }
 
