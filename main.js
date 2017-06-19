@@ -2,6 +2,8 @@ import { Navigator } from 'react-native'
 import React from 'react'
 import Home from './app/Screens/Home'
 import Setup from './app/Screens/Setup'
+import CustomCode from './app/Screens/CustomCode'
+
 import Expo from 'expo'
 
 class App extends React.Component {
@@ -14,6 +16,10 @@ class App extends React.Component {
 
       case 'Home':
         return <Home navigator={navigator} code={route.code} />
+        break
+
+      case 'WatchAd':
+        return <CustomCode navigator={navigator} code={route.code} />
         break
     }
   }
