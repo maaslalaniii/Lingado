@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Constants } from 'expo'
 import { Ionicons } from '@expo/vector-icons'
 import { AsyncStorage, StyleSheet, View, Text, TouchableOpacity, Modal } from 'react-native'
@@ -6,7 +6,7 @@ import { AsyncStorage, StyleSheet, View, Text, TouchableOpacity, Modal } from 'r
 import User from '../Components/User'
 import SearchBar from '../Components/SearchBar'
 
-export default class Home extends React.Component {
+export default class Home extends Component {
 
   constructor(props) {
     super(props)
@@ -23,9 +23,9 @@ export default class Home extends React.Component {
   }
 
   _search() {
-    fetch('https://lingado-6b296.firebaseio.com/users.json')
+    fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.text}.json`)
       .then(response => response.json())
-      .then(response => this.setState({ user: response[this.state.text], showUser: true }))
+      .then(response => this.setState({ user: response, showUser: true }))
   }
 
 
@@ -73,9 +73,14 @@ export default class Home extends React.Component {
           ? this._displayUser(this.state.user)
           : <View style={styles.wrapper}>
               <Text style={styles.instructions}>Search for users by their code. {this.props.code} is your code.</Text>
+              
+              <TouchableOpacity style={styles.customContainer} onPress={() => this.props.navigator.push({ title: 'WatchAd', code: this.props.code })}>
+                <Text style={styles.custom}>Get a custom code</Text>
+              </TouchableOpacity>
+
               <TouchableOpacity style={styles.settings} onPress={() => this.props.navigator.pop()}>
                 <Text>Edit Your Information</Text>
-              </TouchableOpacity>
+              </TouchableOpacity>              
             </View>
         }
 
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 5,
     paddingRight: 5,
-    margin: 25
+    margin: 25,
   },
   instructions: {
     marginTop: 30,
@@ -137,6 +142,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
     justifyContent: 'space-between'
+  },
+  custom: {
+    color: '#eee',
+  },
+  customContainer: {
+    flex: 1,
+    marginTop: 25
   },
   dismiss: {
     padding: 16,
