@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   input: {
     color: 'rgba(255, 255, 255, 0.4)',
-    width: 150,
+    flex: 1,
     height: 50,
     fontSize: 18,
     textAlign: 'right'
@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: 200,
+    alignSelf: 'center',
+    width: '65%',
     justifyContent: 'space-between',
   }
 })

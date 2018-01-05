@@ -49,7 +49,16 @@ export default class Setup extends React.Component {
           this.props.navigator.push({ title: 'Home', code: this.state.code })
           fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`)
             .then(response => response.json())
-            .then(user => this.setState({ name: user.name, email: user.email, phone: user.phone, facebook: user.facebook, instagram: user.instagram, linkedin: user.linkedin, twitter: user.twitter, snapchat: user.snapchat }))
+            .then(user => this.setState({
+              name: user.name,
+              email: user.email,
+              phone: user.phone,
+              facebook: user.facebook,
+              instagram: user.instagram,
+              linkedin: user.linkedin,
+              twitter: user.twitter,
+              snapchat: user.snapchat
+            }))
         }
 
       })
@@ -110,7 +119,7 @@ export default class Setup extends React.Component {
         </Modal>
 
         <Image style={styles.mountains} source={require('../Assets/mountains.png')} />
-
+        
         <View style={styles.info}>
 
           <InformationInput
@@ -189,18 +198,16 @@ const styles = StyleSheet.create({
   },
   instructions: {
     backgroundColor: '#eee',
-    marginVertical: 35,
-    marginHorizontal: 20,
-    paddingHorizontal: 40,
-    paddingVertical: 50,
+    marginVertical: '7.5%',
+    marginHorizontal: '5%',
+    paddingHorizontal: '12.5%',
+    paddingVertical: '12.5%',
     borderRadius: 10,
     flex: 1,
     justifyContent: 'space-between',
   },
   getStarted: {
     color: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
     backgroundColor: 'transparent'
   },
   logo: {
@@ -212,7 +219,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'space-between',
-    padding: 35
+    paddingHorizontal: '10%',
+    paddingVertical: 35
   },
   title: {
     fontSize: 40,

@@ -61,15 +61,15 @@ export default class User extends React.Component {
 
 const styles = StyleSheet.create({
   user: {
+    flex: 1,
     alignItems: 'center',
-    alignSelf: 'center',
-    padding: 25,
+    padding: '12.5%',
   },
   item: {
-    width: 200,
+    flex: 1,
+    alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 15
   },
   icon: {
     color: 'rgba(0, 0, 0, 0.5)'

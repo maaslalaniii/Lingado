@@ -27,12 +27,14 @@ export default class CustomCode extends Component {
     return (
       <View style={styles.container}>
         
-        <Text style={styles.heading}>Customizing your code</Text>
+        <Text style={styles.heading}>Custom Codes</Text>
         <Text style={styles.text}>If you use Lingado a lot, then you will want to get a custom code. Your custom code can be any 4-digit alpha-numeric code as long as it has not been taken. You can either buy a custom code for $0.99 or get it for free by watching ads.</Text>
         
         <View style={styles.buttons}>
         
-          <TouchableOpacity style={styles.watch} onPress={() => FacebookAds.InterstitialAdManager.showAd('244254139402281_244255342735494').then(click => this.setState({ editing: true }))} >
+          <TouchableOpacity style={styles.watch} onPress={() => 
+            FacebookAds.InterstitialAdManager.showAd('244254139402281_244255342735494').then(click => this.setState({ editing: true }))
+          }>
             <Text>Watch ad</Text>
           </TouchableOpacity>
 
@@ -41,8 +43,11 @@ export default class CustomCode extends Component {
           </TouchableOpacity>
         
         </View>
-        
-        <Text style={styles.code}>{this.props.code}</Text>
+
+        <View style={styles.codeWrapper}>
+          <Text style={styles.codeIntroduction}>your current code:</Text>        
+          <Text style={styles.code}>{this.props.code}</Text>
+        </View>
       
       </View>
     )
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
   heading: {
     marginTop: 50,
     marginBottom: 30,
-    fontSize: 28,
+    fontSize: 44,
     color: '#eee'
   },
   text: {
@@ -136,10 +141,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 120,
   },
-  code: {
-    fontSize: 64,
+  codeWrapper: {
     marginTop: 60,
     flex: 1,
+  },
+  codeIntroduction: {
+    color: '#999'
+  },
+  code: {
+    fontSize: 64,
     color: 'rgba(255, 255, 255, 0.8)'
   },
   search: {

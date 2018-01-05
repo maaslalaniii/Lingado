@@ -3,13 +3,13 @@
   "description": "A new approach to networking.",
   "slug": "Lingado",
   "privacy": "public",
-  "sdkVersion": "16.0.0",
+  "sdkVersion": "23.0.0",
   "version": "1.0.0",
   "orientation": "portrait",
   "primaryColor": "#cccccc",
-  "icon": "./app/Assets/logo.png",
+  "icon": "./assets/icons/app.png",
   "loading": {
-    "icon": "./assets/icons/loading.png",
+    "icon": "./app/Assets/logo.png",
     "hideExponentText": false
   },
   "packagerOpts": {
@@ -27,7 +27,7 @@
   },
   "isDetached": true,
   "detach": {
-    "scheme": "exp9d8b76b7650c4356a0edeceee61ca6c0",
+    "scheme": "exp",
     "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v1.15.1-sdk16.0.0-2448b7f4-9b6a-4fd0-906d-8bd7da336bd7.tar.gz"
   }
 }

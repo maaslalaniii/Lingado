@@ -1,4 +1,4 @@
-import { Navigator } from 'react-native'
+import NavigationExperimental from 'react-native-deprecated-custom-components'
 import React from 'react'
 import Home from './app/Screens/Home'
 import Setup from './app/Screens/Setup'
@@ -18,7 +18,7 @@ class App extends React.Component {
         return <Home navigator={navigator} code={route.code} />
         break
 
-      case 'WatchAd':
+      case 'CustomCode':
         return <CustomCode navigator={navigator} code={route.code} />
         break
     }
@@ -26,8 +26,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <Navigator
-        configureScene={route => Navigator.SceneConfigs.PushFromRight}
+      <NavigationExperimental.Navigator
+        configureScene={route => NavigationExperimental.Navigator.SceneConfigs.PushFromRight}
         initialRoute={{ title: 'Setup' }}
         renderScene={this._renderScene.bind(this)}
       />
