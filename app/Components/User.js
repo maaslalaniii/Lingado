@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Linking } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
-export default class User extends React.Component {
+export default class User extends Component {
 
   _open(url) {
     Linking.canOpenURL(url)
@@ -11,48 +11,31 @@ export default class User extends React.Component {
   }
 
   render() {
+    const contactInformation = [
+      { name: 'name', icon: 'md-person', prefix: '' },
+      { name: 'phone', icon: 'ios-call', prefix: 'tel:' },
+      { name: 'email', icon: 'md-mail', prefix: 'mailto:' },
+      { name: 'linkedin', icon: 'logo-linkedin', prefix: 'https://www.linkedin.com/profile/' },
+      { name: 'facebook', icon: 'logo-facebook', prefix: 'https://www.facebook.com/?q=' },
+      { name: 'instagram', icon: 'logo-instagram', prefix: 'https://www.instagram.com/' },
+      { name: 'twitter', icon: 'logo-twitter', prefix: 'https://www.twitter.com/' },
+      { name: 'snapchat', icon: 'logo-snapchat', prefix: 'https://www.snapchat.com/add/' }
+    ]
+
     return (
       <View style={styles.user} {...this.props}>
 
-        <TouchableOpacity style={styles.item}>
-          <Ionicons style={styles.icon} name="md-person" size={20} />
-          <Text style={styles.info}>{this.props.name}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item} onPress={() => {this._open(`tel:${this.props.phone}`)}}>
-          <Ionicons style={styles.icon} name="ios-call" size={20} />
-          <Text style={styles.info}>{this.props.phone}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item} onPress={() => {this._open(`mailto:${this.props.email}?subject=Lingado`)}}>
-          <Ionicons style={styles.icon} name="md-mail" size={18} />
-          <Text style={styles.info}>{this.props.email}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item} onPress={() => {this._open(`linkedin://profile/${this.props.linkedin}`)}}>
-          <Ionicons style={styles.icon} name="logo-linkedin" size={20} />
-          <Text style={styles.info}>{this.props.linkedin}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item} onPress={() => {this._open(`fb://profile/${this.props.facebook}`)}}>
-          <Ionicons style={styles.icon} name="logo-facebook" size={20} />
-          <Text style={styles.info}>{this.props.facebook}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item} onPress={() => {this._open(`instagram://user?username=${this.props.instagram}`)}}>
-          <Ionicons style={styles.icon} name="logo-instagram" size={20} />
-          <Text style={styles.info}>{this.props.instagram}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item} onPress={() => {this._open(`twitter://user?screen_name=${this.props.twitter}?subject=Lingado`)}}>
-          <Ionicons style={styles.icon} name="logo-twitter" size={20} />
-          <Text style={styles.info}>{this.props.twitter}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item} onPress={() => {this._open(`snapchat://add/${this.props.snapchat}?subject=Lingado`)}}>
-          <Ionicons style={styles.icon} name="logo-snapchat" size={20} />
-          <Text style={styles.info}>{this.props.snapchat}</Text>
-        </TouchableOpacity>
+        {
+          contactInformation.map((contact, i) => 
+            <TouchableOpacity
+              key={i}
+              style={styles.item}
+              onPress={() => {this._open(`${contact.prefix}${this.props[contact.name]}`)}}>
+              <Ionicons style={styles.icon} name={contact.icon} size={20} />
+              <Text style={styles.info}>{this.props[contact.name]}</Text>
+            </TouchableOpacity>
+          )
+        }
 
       </View>
     )

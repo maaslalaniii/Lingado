@@ -1,15 +1,11 @@
 {
-  "name": "lingado",
-  "version": "0.0.1",
-  "description": "Welcome to Lingado! A student-run company dedicated to creating innovative solutions that promote easy yet effective networking. We are built on the principle: building success through a passion to learn. We strive to achieve new heights of networking, all through one simple exchange.",
-  "author": "Maas Lalani",
+  "main": "node_modules/expo/AppEntry.js",
   "private": true,
-  "main": "main.js",
   "dependencies": {
-    "expo": "^23.0.0",
-    "react": "16.0.0-alpha.12",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
-    "react-native-animatable": "^1.2.2",
-    "react-native-deprecated-custom-components": "^0.1.1"
+    "expo": "^25.0.0",
+    "react": "16.2.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "react-native-animatable": "^1.2.4",
+    "react-navigation": "^1.0.0-beta.27"
   }
 }

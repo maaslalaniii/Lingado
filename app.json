@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Lingado",
+    "slug": "Lingado",
+    "description": "Changing the way networking works",
+    "sdkVersion": "25.0.0",
+    "version": "0.1.0",
+    "privacy": "public",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png"
+    },
+    "backgroundColor": "#203040"
+  }
+}
