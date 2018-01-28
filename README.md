@@ -1,4 +1,4 @@
-![Lingado](./assets/lingado.png)
+![Lingado](https://raw.githubusercontent.com/Maaslalaniii/Lingado/807bc96b53df647513cabeb223d8be76647cfe87/assets/lingado.png)
 An app that allows you to connect with people instantly on Facebook, Snapchat, Instagram, Twitter, and LinkedIn. The app allows you to network with anyone whether they are across the room or across the world.
 
 To begin using the app simply download the [expo](https://expo.io/) client on [android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www) or [ios](https://itunes.apple.com/app/apple-store/id982107779?ct=www&mt=8)
