@@ -38,7 +38,7 @@ export default class HomeScreen extends Component {
         <View style={styles.userCard}>
           <User
             name={user.name}
-            email={user.email.length >= 14 ? user.email.split('@')[0] + '\n@' + user.email.split('@')[1] : user.email}
+            email={user.email ? user.email.length >= 14 ? user.email.split('@')[0] + '\n@' + user.email.split('@')[1] : user.email : ''}
             phone={user.phone}
             twitter={user.twitter}
             facebook={user.facebook}
@@ -58,7 +58,7 @@ export default class HomeScreen extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={styles.code}>{this.state.code}</Text>
+        <Text style={styles.code}>{this.props.navigation.state.params.code}</Text>
 
         <View style={styles.searchBarContainer}>
           <TextInput style={styles.searchBar}
@@ -82,8 +82,8 @@ export default class HomeScreen extends Component {
           : ( 
             <View style={styles.homeContainer}>
               <View>
-                <Text style={styles.searchInstructions}>Search for users by their code. {this.state.code} is your code.</Text>
-                <TouchableOpacity style={styles.customCodeContainer} onPress={() => this.props.navigation.navigate('CustomizeCode', { code: this.state.code })}>
+                <Text style={styles.searchInstructions}>Search for users by their code. {this.props.navigation.state.params.code} is your code.</Text>
+                <TouchableOpacity style={styles.customCodeContainer} onPress={() => this.props.navigation.navigate('CustomizeCode', { code: this.props.navigation.state.params.code })}>
                   <Text style={styles.customCodeButton}>Get a custom code</Text>
                 </TouchableOpacity>
               </View>

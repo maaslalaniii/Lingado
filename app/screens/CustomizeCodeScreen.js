@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage, TextInput } from 'react-native'
 
-export default class CustomCode extends Component {
+export default class CustomizeCodeScreen extends Component {
   static navigationOptions = {
     header: null
   }
@@ -12,7 +12,7 @@ export default class CustomCode extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      customCode: '',
+      code: '',
       editing: false,
       user: null
     }
@@ -20,10 +20,9 @@ export default class CustomCode extends Component {
 
   componentWillMount() {
     fetch(`https://lingado-6b296.firebaseio.com/users/${this.props.navigation.state.params.code}.json`)
-      .then(user => user.json())
-      .then(user => this.setState({ user }))
+    .then(response => response.json())
+    .then(user => this.setState({ user }))
   }
-
 
   _paymentOption() {
     return (
@@ -68,8 +67,8 @@ export default class CustomCode extends Component {
           underlineColorAndroid='transparent'
           placeholder='code'
           placeholderTextColor='rgba(255, 255, 255, 0.4)'
-          onChangeText={customCode => this.setState({ customCode })}
-          value={this.state.customCode}
+          onChangeText={code => this.setState({ code })}
+          value={this.state.code}
           onBlur={this._updateCode.bind(this)} />
         <Ionicons onPress={this._updateCode.bind(this)} style={styles.icon} name='md-search' size={20} color="rgba(255, 255, 255, 0.4)" />
       </View>
@@ -79,7 +78,7 @@ export default class CustomCode extends Component {
   }
 
   _updateCode() {
-    fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.customCode}.json`)
+    fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`)
     .then(response => response.json())
     .then(response => {
       // Make sure code is not in use
@@ -87,19 +86,19 @@ export default class CustomCode extends Component {
         return alert('This code is taken, please try another.')
         
       // Import the user information to the new code
-      fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.customCode}.json`, { method: 'PUT', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(this.state.user) })
+      fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`, { method: 'PUT', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(this.state.user) })
       
       // Delete the information on the old code
       .then(response => fetch(`https://lingado-6b296.firebaseio.com/users/${this.props.navigation.state.params.code}.json`, { method: 'DELETE' }))
         
       // Set the new code as the device code and then go back to the information screen
-      .then(response => AsyncStorage.setItem('code', this.state.customCode)
+      .then(response => AsyncStorage.setItem('code', this.state.code)
       .then(response => {
         // Pop all the screens and then navigate back to home with the new code
         const { navigate, goBack } = this.props.navigation
         goBack(null)
         goBack(null)
-        navigate('Home', { code: this.state.customCode })
+        navigate('Home', { code: this.state.code })
       }))
     })
   }
