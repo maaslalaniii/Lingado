@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import * as Animatable from 'react-native-animatable'
-import { Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
-import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
+import { SearchBar } from '../components'
 
 export default class CustomizeCodeScreen extends Component {
   static navigationOptions = {
@@ -29,8 +29,10 @@ export default class CustomizeCodeScreen extends Component {
       <View style={styles.container}>
         
         <Text style={styles.heading}>Custom Codes</Text>
-        <Text style={styles.text}>If you use Lingado a lot, then you will want to get a custom code. Your custom code can be any 4-digit alpha-numeric code as long as it has not been taken. The first thousand users of Lingado get a free custom code for being an early supporter.</Text>
-        
+        <Text style={styles.text}>
+          If you use Lingado a lot, then you will want to get a custom code. Your custom code can be any 4-digit alpha-numeric code as long as it has not been taken.
+          The first thousand users of Lingado get a free custom code for being an early supporter.
+        </Text>        
         <View style={styles.buttons}>
         
           <TouchableOpacity style={styles.free} onPress={() => this.setState({ editing: true })}>
@@ -56,22 +58,7 @@ export default class CustomizeCodeScreen extends Component {
         <Text style={styles.text}>Enter the code you would like to have.</Text>
         <Text style={styles.text}>If you want to keep your code swipe from Left to Right to go back.</Text>
 
-        
-        <View style={styles.searchBarContainer}>
-        <TextInput style={styles.searchBar}
-          maxLength={4}
-          autoCorrect={false}
-          spellCheck={false}
-          autoCapitalize='none'
-          returnKeyType={'search'}
-          underlineColorAndroid='transparent'
-          placeholder='code'
-          placeholderTextColor='rgba(255, 255, 255, 0.4)'
-          onChangeText={code => this.setState({ code })}
-          value={this.state.code}
-          onBlur={this._updateCode.bind(this)} />
-        <Ionicons onPress={this._updateCode.bind(this)} style={styles.icon} name='md-search' size={20} color="rgba(255, 255, 255, 0.4)" />
-      </View>
+        <SearchBar onChangeText={code => this.setState({ code })} search={this._updateCode.bind(this)} value={this.state.code} />
 
       </Animatable.View>
     )
@@ -86,7 +73,14 @@ export default class CustomizeCodeScreen extends Component {
         return alert('This code is taken, please try another.')
         
       // Import the user information to the new code
-      fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`, { method: 'PUT', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(this.state.user) })
+      fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.user)
+      })
       
       // Delete the information on the old code
       .then(response => fetch(`https://lingado-6b296.firebaseio.com/users/${this.props.navigation.state.params.code}.json`, { method: 'DELETE' }))
@@ -159,22 +153,5 @@ const styles = StyleSheet.create({
   code: {
     fontSize: 64,
     color: 'rgba(255, 255, 255, 0.8)'
-  },
-  searchBarContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.8)',
-    marginTop: 40,
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingLeft: 5,
-    paddingRight: 5,
-    margin: 25,
-  },
-  searchBar: {
-    width: 200,
-    height: 44,
-    fontSize: 18,
-    alignSelf: 'center',
-    color: 'rgba(255, 255, 255, 0.4)'
-  },
+  }
 })

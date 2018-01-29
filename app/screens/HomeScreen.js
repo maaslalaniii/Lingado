@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { AsyncStorage, TouchableOpacity, Modal, StyleSheet, Text, TextInput, View } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import { AsyncStorage, TouchableOpacity, Modal, StyleSheet, Text, View } from 'react-native'
 import { Constants } from 'expo'
-import { User } from '../components'
+import { User, SearchBar } from '../components'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -38,7 +37,11 @@ export default class HomeScreen extends Component {
         <View style={styles.userCard}>
           <User
             name={user.name}
-            email={user.email ? user.email.length >= 14 ? user.email.split('@')[0] + '\n@' + user.email.split('@')[1] : user.email : ''}
+            email={user.email
+              ? user.email.length >= 14
+                ? user.email.split('@')[0] + '\n@' + user.email.split('@')[1]
+                : user.email
+              : '' }
             phone={user.phone}
             twitter={user.twitter}
             facebook={user.facebook}
@@ -54,45 +57,35 @@ export default class HomeScreen extends Component {
     )
   }
 
+  _displayHome() {
+    return (
+      <View style={styles.homeContainer}>
+        <View>
+          <Text style={styles.searchInstructions}>Search for users by their code. {this.props.navigation.state.params.code} is your code.</Text>
+          <TouchableOpacity style={styles.customCodeContainer} onPress={() => this.props.navigation.navigate('CustomizeCode', { code: this.props.navigation.state.params.code })}>
+            <Text style={styles.customCodeButton}>Get a custom code</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.editInformationButton} onPress={() => this.props.navigation.goBack()}>
+          <Text>Edit Your Information</Text>
+        </TouchableOpacity>              
+      </View>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
 
         <Text style={styles.code}>{this.props.navigation.state.params.code}</Text>
 
-        <View style={styles.searchBarContainer}>
-          <TextInput style={styles.searchBar}
-            maxLength={4}
-            autoCorrect={false}
-            spellCheck={false}
-            autoCapitalize='none'
-            returnKeyType={'search'}
-            underlineColorAndroid='transparent'
-            placeholder='code'
-            placeholderTextColor='rgba(255, 255, 255, 0.4)'
-            onChangeText={text => this.setState({ text })}
-            value={this.state.text}
-            onBlur={this._search.bind(this)} />
-          <Ionicons onPress={this._search.bind(this)} style={styles.icon} name='md-search' size={20} color="rgba(255, 255, 255, 0.4)" />
-        </View>
+        <SearchBar onChangeText={text => this.setState({ text })} search={this._search.bind(this)} />
 
         {
           this.state.user
           ? this._displayUser(this.state.user)
-          : ( 
-            <View style={styles.homeContainer}>
-              <View>
-                <Text style={styles.searchInstructions}>Search for users by their code. {this.props.navigation.state.params.code} is your code.</Text>
-                <TouchableOpacity style={styles.customCodeContainer} onPress={() => this.props.navigation.navigate('CustomizeCode', { code: this.props.navigation.state.params.code })}>
-                  <Text style={styles.customCodeButton}>Get a custom code</Text>
-                </TouchableOpacity>
-              </View>
-
-              <TouchableOpacity style={styles.editInformationButton} onPress={() => this.props.navigation.goBack()}>
-                <Text>Edit Your Information</Text>
-              </TouchableOpacity>              
-            </View>
-          )
+          : this._displayHome()
         }
       </View>      
     )
@@ -114,22 +107,6 @@ const styles = StyleSheet.create({
     fontSize: 64,
     marginTop: 30,
     color: 'rgba(255, 255, 255, 0.8)'
-  },
-  searchBarContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.8)',
-    marginVertical: '7.5%',
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingLeft: 5,
-    paddingRight: 5
-  },
-  searchBar: {
-    width: 200,
-    height: 44,
-    fontSize: 18,
-    alignSelf: 'center',
-    color: 'rgba(255, 255, 255, 0.4)'
   },
   searchInstructions: {
     marginTop: 30,

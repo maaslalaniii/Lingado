@@ -1,4 +1,5 @@
 import Instructions from './Instructions'
 import User from './User'
+import SearchBar from './SearchBar'
 
-export { Instructions, User }
+export { Instructions, User, SearchBar }
