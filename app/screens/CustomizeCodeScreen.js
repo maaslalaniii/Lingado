@@ -68,6 +68,7 @@ export default class CustomizeCodeScreen extends Component {
       .then(user => {
 
         // Import the user information to the new code
+        user.code = this.state.code
         fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.code}.json`, { method: 'PUT', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
         
         // Delete the information on the old code
