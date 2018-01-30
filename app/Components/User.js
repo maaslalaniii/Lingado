@@ -16,7 +16,7 @@ export default class User extends Component {
       { name: 'phone', icon: 'ios-call', prefix: 'tel:' },
       { name: 'email', icon: 'md-mail', prefix: 'mailto:' },
       { name: 'linkedin', icon: 'logo-linkedin', prefix: 'https://www.linkedin.com/profile/' },
-      { name: 'facebook', icon: 'logo-facebook', prefix: 'https://www.facebook.com/?q=' },
+      { name: 'facebook', icon: 'logo-facebook', prefix: 'https://www.facebook.com/' },
       { name: 'instagram', icon: 'logo-instagram', prefix: 'https://www.instagram.com/' },
       { name: 'twitter', icon: 'logo-twitter', prefix: 'https://www.twitter.com/' },
       { name: 'snapchat', icon: 'logo-snapchat', prefix: 'https://www.snapchat.com/add/' }

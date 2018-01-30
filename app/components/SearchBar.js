@@ -10,7 +10,9 @@ export default class SearchBar extends Component {
   render() {
     return (
       <View style={styles.searchBarContainer}>
-        <TextInput style={styles.searchBar}
+        <TextInput 
+          {...this.props}  
+          style={styles.searchBar}
           maxLength={4}
           autoCorrect={false}
           spellCheck={false}
@@ -18,12 +20,8 @@ export default class SearchBar extends Component {
           returnKeyType={'search'}
           underlineColorAndroid='transparent'
           placeholder='code'
-          placeholderTextColor='rgba(255, 255, 255, 0.4)'
-          onChangeText={() => this.props.onChangeText()}
-          value={this.props.value}
-          onBlur={() => this.props.search()} />
+          placeholderTextColor='rgba(255, 255, 255, 0.4)' />
         <Ionicons
-          onPress={() => this.props.search()}
           style={styles.icon}
           name='md-search'
           size={20}
@@ -37,12 +35,11 @@ const styles = StyleSheet.create({
   searchBarContainer: {
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255, 255, 255, 0.8)',
-    marginTop: 40,
+    marginTop: 25,
     alignItems: 'center',
     flexDirection: 'row',
     paddingLeft: 5,
     paddingRight: 5,
-    margin: 25,
   },
   searchBar: {
     width: 200,

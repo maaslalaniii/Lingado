@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { AsyncStorage, TouchableOpacity, Modal, StyleSheet, Text, View } from 'react-native'
 import { Constants } from 'expo'
 import { User, SearchBar } from '../components'
+import { Ionicons } from '@expo/vector-icons'
 
-export default class HomeScreen extends Component {
+export default class HomeScreen extends Component {  
   static navigationOptions = {
     header: null
   }
@@ -14,12 +15,54 @@ export default class HomeScreen extends Component {
       code: '',
       text: '',
       search: false,
-      user: undefined
+      user: undefined,
+      icon: undefined,
+      favourite: false
     }
   }
-
+  
   componentDidMount() {
-    this.setState({ code: this.props.navigation.state.params.code })
+    this.setState({
+      code: this.props.navigation.state.params.code,
+      icon: require('../../assets/icon.png')
+    })
+  }
+
+  _saveContact(code, name) {
+    if (code == this.props.navigation.state.params.code) {
+      return alert(`You cannot add yourself as a contact`)
+    }
+
+    if (this.state.favourite) {
+      return alert(`${name} is already in your contacts`)
+    }
+
+    this.setState({ favourite: true })
+    
+    AsyncStorage.getItem('contacts')
+    .then(contacts => {
+      contacts = JSON.parse(contacts)
+      if (!contacts) {
+        contacts = {}
+        contacts[code] = name
+      } else {
+        contacts[code] = name
+      }
+      AsyncStorage.setItem('contacts', JSON.stringify(contacts))
+      .then(() => alert(`${name} was added to your contacts.`))
+    })
+  }
+
+  _isFavourited(code) {
+    AsyncStorage.getItem('contacts')
+    .then(contacts => {
+      if (!contacts) return
+
+      contacts = JSON.parse(contacts)
+      if (contacts[code]) {
+        this.setState({ favourite: true })
+      }
+    })
   }
 
   _search() {
@@ -28,7 +71,11 @@ export default class HomeScreen extends Component {
     
     fetch(`https://lingado-6b296.firebaseio.com/users/${this.state.text}.json`)
     .then(response => response.json())
-    .then(user => this.setState({ user, search: true }))
+    .then(user => {
+      if (!user) return alert(`User not found`)
+      this._isFavourited(user.code)
+      this.setState({ user, search: true })
+    })
   }
 
   _displayUser(user) {
@@ -49,9 +96,18 @@ export default class HomeScreen extends Component {
             linkedin={user.linkedin} 
             snapchat={user.snapchat}
           />
-          <TouchableOpacity style={styles.dismiss} onPress={() => this.setState({ search: false, text: '', user: undefined })}>
-            <Text style={styles.buttonText}>Done</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.dismiss} onPress={() => this.setState({ search: false, text: '', user: undefined, favourite: false })}>
+              <Text style={styles.buttonText}>Done</Text>
+            </TouchableOpacity>
+            {
+              this.state.code != this.state.text ? (
+                <TouchableOpacity style={styles.save} onPress={() => this._saveContact(user.code, user.name)}>
+                <Ionicons name={this.state.favourite ? 'md-heart' : 'md-heart-outline'} color='#FE5F55' size={30} />
+                </TouchableOpacity>
+              ) : ( <View></View> )
+            }
+          </View>
         </View>
       </Modal>     
     )
@@ -62,8 +118,11 @@ export default class HomeScreen extends Component {
       <View style={styles.homeContainer}>
         <View>
           <Text style={styles.searchInstructions}>Search for users by their code. {this.props.navigation.state.params.code} is your code.</Text>
-          <TouchableOpacity style={styles.customCodeContainer} onPress={() => this.props.navigation.navigate('CustomizeCode', { code: this.props.navigation.state.params.code })}>
-            <Text style={styles.customCodeButton}>Get a custom code</Text>
+          <TouchableOpacity style={styles.navigationContainer} onPress={() => this.props.navigation.navigate('CustomizeCode', { code: this.props.navigation.state.params.code })}>
+            <Text style={styles.navigationButton}>Get a custom code</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.navigationContainer} onPress={() => this.props.navigation.navigate('Contacts', { code: this.props.navigation.state.params.code, icon: this.state.icon })}>
+            <Text style={styles.navigationButton}>View your contacts</Text>
           </TouchableOpacity>
         </View>
 
@@ -80,7 +139,10 @@ export default class HomeScreen extends Component {
 
         <Text style={styles.code}>{this.props.navigation.state.params.code}</Text>
 
-        <SearchBar onChangeText={text => this.setState({ text })} search={this._search.bind(this)} />
+        <SearchBar
+          onChangeText={text => this.setState({ text })}
+          onBlur={() => this._search()}
+          value={this.state.text} />
 
         {
           this.state.user
@@ -97,19 +159,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#203040',
     alignItems: 'center',
-    paddingTop: Constants.statusBarHeight + 20
+    paddingTop: Constants.statusBarHeight + 40,
   },
   homeContainer: {
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingVertical: '15%'
   },
   code: {
     fontSize: 64,
-    marginTop: 30,
     color: 'rgba(255, 255, 255, 0.8)'
   },
   searchInstructions: {
-    marginTop: 30,
     width: 200,
     color: 'rgba(255, 255, 255, 0.5)'
   },
@@ -128,19 +189,31 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     padding: 15,
     alignItems: 'center',
-    marginBottom: '15%'
   },
-  customCodeButton: {
+  navigationButton: {
     color: '#eee',
+    fontSize: 16,
   },
-  customCodeContainer: {
-    paddingVertical: 20
+  navigationContainer: {
+    paddingTop: 25
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
   },
   dismiss: {
     padding: 16,
+    flex:1,
     borderRadius: 50,
     backgroundColor: '#06ce97',
     alignItems: 'center',
+  },
+  save: {
+    paddingRight: 0,
+    paddingLeft: 16,
+    paddingVertical: 8,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   buttonText: {
     color: '#fff',

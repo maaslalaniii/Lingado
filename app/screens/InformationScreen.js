@@ -52,7 +52,6 @@ export default class InformationScreen extends Component {
   }
 
   _submit() {
-    console.log(this.state)
     AsyncStorage.getItem('code')
     .then(code => {
       this.setState({ code })
@@ -74,7 +73,7 @@ export default class InformationScreen extends Component {
           twitter: this.state.twitter,
           snapchat: this.state.snapchat,
         })
-      }).then(response => console.log)
+      })
     })
   }
 
@@ -93,11 +92,11 @@ export default class InformationScreen extends Component {
       { title: 'Twitter', icon: 'logo-twitter', onChangeText: twitter => this.setState({ twitter }) },
       { title: 'Snapchat', icon: 'logo-snapchat', onChangeText: snapchat => this.setState({ snapchat }) }
     ]
-
+    
     return (
-      
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Image style={styles.mountains} source={require('../../assets/mountains.png')} />
 
           {
             contactInformation.map((contact, i) => (
@@ -117,22 +116,20 @@ export default class InformationScreen extends Component {
           }
 
           <Instructions visible={this.state.instructions} onPress={this._toggleInstructions.bind(this)} />
-
-          <Image style={styles.mountains} source={require('../../assets/mountains.png')} />
           
           <View style={styles.actionsContainer}>
-
+          
             <TouchableOpacity onPress={this._toggleInstructions.bind(this)}>
               <Text style={styles.instructionsShowButton}>Need Help?</Text>
             </TouchableOpacity>
-          
+            
             <TouchableOpacity style={styles.submitButton} onPress={this._submit.bind(this)}>
               <Ionicons name='ios-arrow-round-forward' size={45} color='white' />
             </TouchableOpacity>
           
           </View>
-        
-          </View>
+          
+        </View>
       </TouchableWithoutFeedback>      
     )
   }
