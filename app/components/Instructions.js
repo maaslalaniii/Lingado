@@ -20,7 +20,7 @@ export default class Instructions extends Component {
           <Text style={styles.instructionsText}>You can also search for others using their 4 digit code.</Text>
         </View>
         <TouchableOpacity style={styles.instructionsContinueButton} onPress={this.props.onPress}>
-          <Text style={styles.instructionsButtonText}>Let's go</Text>
+          <Text style={styles.instructionsButtonText}>Lets go</Text>
         </TouchableOpacity>
       </View>
     </Modal>
