@@ -16,7 +16,7 @@ export default class Instructions extends Component {
         </View>
         <View>
           <Text style={styles.instructionsText}>To get started enter your contact information on the next screen and press the button to continue.</Text>
-          <Text style={styles.instructionsText}>You'll get a 4 digit code to give to others so they can see your information, like a virtual business card.</Text>
+          <Text style={styles.instructionsText}>You will get a 4 digit code to give to others so they can see your information, like a virtual business card.</Text>
           <Text style={styles.instructionsText}>You can also search for others using their 4 digit code.</Text>
         </View>
         <TouchableOpacity style={styles.instructionsContinueButton} onPress={this.props.onPress}>
